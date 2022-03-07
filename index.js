@@ -260,7 +260,12 @@ class GameController {
       }
       if (Answer.answers.length == pattern.length) {
         // move to next level;
-        this.nextLevel();
+        // make it unclickable until then
+        var self = this;
+        self.gameState = 3;
+        setTimeout(function() {
+          self.nextLevel();
+        }, 500);
       }
     }
   }
