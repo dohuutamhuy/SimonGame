@@ -273,13 +273,6 @@ class GameController {
 
 
 function main() {
-  // Generate list of pattern to follow
-  // let pattern = generatePattern(2);
-  // for (let i = 0; i < pattern.length; i++) {
-  //   console.log(Color.getColorWithID(pattern[i]).name);
-  // }
-
-  Pattern.generatePattern(5);
   let game = new GameController();
   $(document).keydown(function() {
     game.start();
