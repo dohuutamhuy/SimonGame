@@ -124,7 +124,9 @@ class GameController {
   constructor() {
     this.buttons = this.setupButton();
     this.level = 1;
-    this.gameState = 0; // 0 for not started, 1 is running
+    this.gameState = 0;
+    // 0 for not started, 1 is running,
+    // 2 is game over, 3 is showing pattern
   }
 
   setupButton() {
@@ -166,6 +168,8 @@ class GameController {
   }
 
   runPattern(pattern) {
+    let gameController = this;
+    gameController.gameState = 3;
     let red = null;
     let green = null;
     let blue = null;
@@ -192,21 +196,33 @@ class GameController {
         case Color.Red:
           setTimeout(function() {
             red.click();
+            if (i == pattern.length - 1) {
+              gameController.gameState = 1;
+            }
           }, timeout);
           break;
         case Color.Green:
           setTimeout(function() {
             green.click();
+            if (i == pattern.length - 1) {
+              gameController.gameState = 1;
+            }
           }, timeout);
           break;
         case Color.Blue:
           setTimeout(function() {
             blue.click();
+            if (i == pattern.length - 1) {
+              gameController.gameState = 1;
+            }
           }, timeout);
           break;
         case Color.Yellow:
           setTimeout(function() {
             yellow.click();
+            if (i == pattern.length - 1) {
+              gameController.gameState = 1;
+            }
           }, timeout);
           break;
         default:
@@ -222,6 +238,7 @@ class GameController {
     // Update text
     $("body").addClass("game-over");
     $("#level-title").text("Game Over, Press Any Key to Restart");
+    new Audio("sounds/wrong.mp3").play();
     setTimeout(function () {
       $("body").removeClass("game-over");
     }, 100);
