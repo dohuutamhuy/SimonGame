@@ -83,8 +83,16 @@ class Pattern {
     }
   }
 
+  static addOnePattern() {
+    Pattern.pattern.push(Color.getColorWithID(Math.floor(Math.random() * 4)));
+  }
+
   static get() {
     return Pattern.pattern;
+  }
+
+  static clear() {
+    Pattern.pattern = [];
   }
 }
 
@@ -160,7 +168,7 @@ class GameController {
     // Show current level
     $("#level-title").text("Level " + this.level);
     // Generate pattern
-    Pattern.generatePattern(this.level);
+    Pattern.addOnePattern();
     // Clear answer
     Answer.clear();
     // Run Pattern
@@ -235,6 +243,7 @@ class GameController {
   gameOver() {
     this.gameState = 2;
     this.level = 1;
+    Pattern.clear();
     // Update text
     $("body").addClass("game-over");
     $("#level-title").text("Game Over, Press Any Key to Restart");
